@@ -1,0 +1,75 @@
+<div class="flex flex-wrap p-5 bg-gray-100">
+    <div class="w-2/5 p-5 bg-white">
+        <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+            <div class="mb-5">
+                <input type="text" name="id" [(ngModel)]="team.id" hidden>
+                <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
+                    Team Name
+                </label>
+                <input type="text" name="team_name" [(ngModel)]="team.team_name" id="name" placeholder="Team Name"
+                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+            </div>
+            <div class="mb-5">
+                <label for="employees" class="mb-3 block text-base font-medium text-[#07074D]">
+                    Employees
+                </label>
+                <select multiple type="text" name="employees" [(ngModel)]="team.employees" id="employees" placeholder="Employees"
+                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+                    <option *ngFor="let employee of employees" [value]="employee.id">
+                        {{employee.fullname}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <button
+                    class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none">
+                    {{isEdit? "Update":"submit"}}
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="w-3/5 bg-white px-5">
+        <div class="w-full mx-auto p-5">
+            <div class="flex flex-col">
+                <div class="overflow-x-auto border">
+                    <div class="inline-block min-w-full align-middle">
+                        <div class="overflow-hidden ">
+                            <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
+                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                    <tr>
+                                        <th scope="col"
+                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                            Content
+                                        </th>
+                                        <th scope="col" class="p-4">
+                                            <span class="sr-only">Edit</span>
+                                        </th>
+                                        <th scope="col" class="p-4">
+                                            <span class="sr-only">Delete</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                                    <tr *ngFor="let team of teams">
+                                        <td
+                                            class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{team.team_name}}</td>
+                                        <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                            <button (click)="edit(team)"
+                                                class="text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
+                                        </td>
+                                        <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                            <button (click)="delete(team)"
+                                                class="text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
